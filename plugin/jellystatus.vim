@@ -20,14 +20,12 @@ function! ModeCurrent() abort
 endfunction
 
 set statusline=
-set statusline+=%1*\ %{ModeCurrent()}
-set statusline+=%4*\ %l:%v\ %*
-set statusline+=%3*\ %m
-set statusline+=%3*\ %F
-set statusline+=%3*\ %=
-set statusline+=%1*\ <<
-set statusline+=%1*\ %{strftime('%R',getftime(expand('%')))}
-set statusline+=%1*\ >>\ %*
+set statusline+=%1*\ %{ModeCurrent()} " Show Current mode
+set statusline+=%4*\ %l:%v\ %* " Line : Column
+set statusline+=%3*\ %m " Modified indicator
+set statusline+=%3*\ %F " Full file path
+set statusline+=%3*\ %= " Seperator
+set statusline+=%2*\ %p " Percentage through file
 
 hi User1 ctermbg=green  ctermfg=0
 hi User2 ctermbg=0      ctermfg=green
