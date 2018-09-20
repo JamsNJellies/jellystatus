@@ -25,7 +25,7 @@ set statusline+=%4*\ %l:%v\ %* " Line : Column
 set statusline+=%3*\ %m " Modified indicator
 set statusline+=%3*\ %F " Full file path
 set statusline+=%3*\ %= " Seperator
-set statusline+=%1*\ %p%% \ %*" Percentage through file
+set statusline+=%1*\ %p%%\ %*" Percentage through file
 
 hi User1 ctermbg=green  ctermfg=0
 hi User2 ctermbg=0      ctermfg=green
