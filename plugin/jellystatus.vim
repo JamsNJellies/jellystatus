@@ -19,6 +19,21 @@ function! ModeCurrent() abort
     return l:current_status_mode
 endfunction
 
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+" Set Statusline
+
 set statusline=
 set statusline+=%1*\ %{ModeCurrent()} " Show Current mode
 set statusline+=%4*\ %l:%v\ %* " Line : Column
@@ -26,9 +41,9 @@ set statusline+=%3*\ %m " Modified indicator
 set statusline+=%3*\ %F " Full file path
 set statusline+=%3*\ %= " Seperator
 set statusline+=%1*\ %p%%\ %*" Percentage through file
+set statusline+=%4\ %{LinterStatus()}\ %*
 
 hi User1 ctermbg=green  ctermfg=0
 hi User2 ctermbg=0      ctermfg=green
 hi User3 ctermbg=0      ctermfg=white
 hi User4 ctermbg=grey   ctermfg=0
-
