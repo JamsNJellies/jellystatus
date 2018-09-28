@@ -42,7 +42,7 @@ set statusline+=%3*\ %m " Modified indicator
 set statusline+=%3*\ %F " Full file path
 set statusline+=%3*\ %= " Seperator
 set statusline+=%1*\ %p%%\ %* " Percentage through file
-set statusline+=%4*\ %{LinterStatus()}
+set statusline+=%4*\ %{LinterStatus()}\ %*
 
 hi User1 ctermbg=green  ctermfg=0
 hi User2 ctermbg=0      ctermfg=green
