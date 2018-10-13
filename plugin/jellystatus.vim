@@ -28,6 +28,7 @@ function! LinterStatus() abort
    \ l:all_non_errors,
    \ l:all_errors
    \)
+endfunction
 
 " Set Statusline
 
