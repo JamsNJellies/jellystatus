@@ -4,7 +4,7 @@ set noshowmode
 
 " Dictionary: take mode() input -> longer notation of current mode
 " mode() is defined by Vim
-let g:currentmode={ 'n' : 'N', 'no' : 'NO', 'v' : 'V ', 'V' : 'VL ', '^V' : 'VB', 's' : 'S ', 'S': 'SL ', '^S' : 'SBk ', 'i' : 'I ', 'R' : 'R ', 'Rv' : 'VR ', 'c' : 'N ', 'cv' : 'EX ', 'ce' : 'EX ', 'r' : 'P ', 'rm' : 'M ', 'r?' : 'CN ', '!' : 'S ', 't' : 'T '}
+let g:currentmode={ 'n' : 'N ', 'no' : 'NO ', 'v' : 'V ', 'V' : 'VL ', '^V' : 'VB ', 's' : 'S ', 'S': 'SL ', '^S' : 'SB ', 'i' : 'I ', 'R' : 'R ', 'Rv' : 'VR ', 'c' : 'N ', 'cv' : 'EX ', 'ce' : 'EX ', 'r' : 'P ', 'rm' : 'M ', 'r?' : 'CN ', '!' : 'S ', 't' : 'T '}
 
 " Function: return current mode
 " abort -> function will abort soon as error detected
@@ -18,6 +18,17 @@ function! ModeCurrent() abort
     return l:current_status_mode
 endfunction
 
+" Function: display errors from Ale in statusline
+function! LinterStatus() abort
+   let l:counts = ale#statusline#Count(bufnr(''))
+   let l:all_errors = l:counts.error + l:counts.style_error
+   let l:all_non_errors = l:counts.total - l:all_errors
+   return l:counts.total == 0 ? '' : printf(
+   \ 'W:%d E:%d',
+   \ l:all_non_errors,
+   \ l:all_errors
+   \)
+
 " Set Statusline
 
 set statusline=
@@ -26,6 +37,7 @@ set statusline+=%4*\ %l:%v\ %* " Line : Column
 set statusline+=%3*\ %m " Modified indicator
 set statusline+=%3*\ %F " Full file path
 set statusline+=%3*\ %= " Seperator
+set statusline+=%4*\ %{LinterStatus()}
 set statusline+=%1*\ %p%%\ %* " Percentage through file
 
 hi User1 ctermbg=green  ctermfg=0
