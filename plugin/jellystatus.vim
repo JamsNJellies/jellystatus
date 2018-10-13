@@ -4,7 +4,7 @@ set noshowmode
 
 " Dictionary: take mode() input -> longer notation of current mode
 " mode() is defined by Vim
-let g:currentmode={ 'n' : 'Normal ', 'no' : 'N·Operator Pending ', 'v' : 'Visual ', 'V' : 'V·Line ', '^V' : 'V·Block ', 's' : 'Select ', 'S': 'S·Line ', '^S' : 'S·Block ', 'i' : 'Insert ', 'R' : 'Replace ', 'Rv' : 'V·Replace ', 'c' : 'Command ', 'cv' : 'Vim Ex ', 'ce' : 'Ex ', 'r' : 'Prompt ', 'rm' : 'More ', 'r?' : 'Confirm ', '!' : 'Shell ', 't' : 'Terminal '}
+let g:currentmode={ 'n' : 'N', 'no' : 'NO', 'v' : 'V ', 'V' : 'VL ', '^V' : 'VB', 's' : 'S ', 'S': 'SL ', '^S' : 'SBk ', 'i' : 'I ', 'R' : 'R ', 'Rv' : 'VR ', 'c' : 'N ', 'cv' : 'EX ', 'ce' : 'EX ', 'r' : 'P ', 'rm' : 'M ', 'r?' : 'CN ', '!' : 'S ', 't' : 'T '}
 
 " Function: return current mode
 " abort -> function will abort soon as error detected
@@ -13,7 +13,7 @@ function! ModeCurrent() abort
     " use get() -> fails safely, since ^V doesn't seem to register
     " 3rd arg is used when return of mode() == 0, which is case with ^V
     " thus, ^V fails -> returns 0 -> replaced with 'V Block'
-    let l:modelist = toupper(get(g:currentmode, l:modecurrent, 'V·Block '))
+    let l:modelist = toupper(get(g:currentmode, l:modecurrent, 'VB '))
     let l:current_status_mode = l:modelist
     return l:current_status_mode
 endfunction
